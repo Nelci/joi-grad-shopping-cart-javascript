@@ -36,6 +36,18 @@ describe("Shopping cart should checkout", () => {
         expect(order.totalPrice).toBe(100);
         expect(order.loyaltyPoints).toBe(20);
     });
+
+    it("Should calculte correct total and loyalty points for 20% discounted products", () => {
+        const customer = new Customer("Test customer");
+        const products = [new Product(100, "DIS_20_TestProduct", "Test product")];
+        const shoppingCart = new ShoppingCart(customer, products);
+        
+        const order = shoppingCart.checkout();
+
+        expect(order.totalPrice).toBe(80);
+        expect(order.loyaltyPoints).toBe(5)
+    });
+
 });
 
 describe("Shopping cart should modify products", () => {
